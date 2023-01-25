@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Get Devices</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    <script>
+
+
+        $(document).ready(function () {
+            var url_string = window.location.href; //window.location.href
+            var url = new URL(url_string);
+            var id = url.searchParams.get("id");
+            $.ajax(
+                {
+                    url: "http://localhost:8080/devices/" + id,
+                    method: "GET",
+                    success: function (data, status) {
+                        console.log(data);
+
+                        $("#name").html(data.name);
+                        $("#coord").html("Latitude: " + data.lat + "<br>Longitude: " + data.lon);
+                        var edit = '<button class="GFG"     onclick="window.location.href = \'./putDevice.html?id=' + id + '\';">Edit</button>'
+                        $("#edit").html(edit)
+
+                        map = new OpenLayers.Map("mapdiv");
+                        map.addLayer(new OpenLayers.Layer.OSM());
+
+                        var zoom = 13;
+                        var lonLat = new OpenLayers.LonLat(data.lon, data.lat)
+                            .transform(
+                                new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+                                map.getProjectionObject() // to Spherical Mercator Projection
+                            );
+
+
+                        var markers = new OpenLayers.Layer.Markers("Markers");
+                        map.addLayer(markers);
+
+                        markers.addMarker(new OpenLayers.Marker(lonLat));
+
+                        map.setCenter(lonLat, zoom);
+                    },
+                    error: function (status) {
+                        $("#content").html(status.status + ' ' + status.statusText)
+                    }
+                }
+            )
+        })
+
+
+    </script>
+</head>
+
+<body>
+
+
+
+    <h1 id="name"> </h1>
+    <div class="row" style="display: flex;">
+        <div class="column" style="flex: 20%;padding: 5px">
+            <h3 id="coord"> </h3>
+        </div>
+        <div id="edit" class="column" style="flex: 80%;padding: 5px">
+
+        </div>
+    </div>
+
+
+    <div id="mapdiv" style="width: 500px; height: 500px;"></div>
+
+</body>
+
+</html>

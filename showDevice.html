@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>show Devices</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax(
+                {
+                    url: "http://localhost:8080/devices",
+                    method: "GET",
+                    success: function (data, status) {
+                        console.log(data);
+                        var out = '<table>';
+                        $.each(data, function (key, value) {
+                            out += '<tr><td> <a href="./getDevice.html?id=' + value.id + '">' + value.name + '</a></td></tr>';
+                        });
+                        out += '</table>';
+                        $("#content").html(out);
+
+                    },
+                    error: function (status) {
+                        $("#content").html(status.status + ' ' + status.statusText)
+                    }
+                }
+            )
+        })
+
+
+    </script>
+</head>
+
+<body>
+
+    <h1>Devices</h1>
+
+
+    <div id="content">
+
+    </div>
+
+
+</body>
+
+</html>

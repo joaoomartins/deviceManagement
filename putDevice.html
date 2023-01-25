@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Put Device</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+
+        var id;
+        $(document).ready(
+            function () {
+                var url_string = window.location.href; //window.location.href
+                var url = new URL(url_string);
+                id = url.searchParams.get("id");
+
+                $.ajax(
+                    {
+                        url: "http://localhost:8080/devices/" + id,
+                        method: "GET",
+                        success: function (data, status) {
+                            console.log(data);
+                            $("#name").val(data.name);
+                            $("#lat").val(data.lat);
+                            $("#lon").val(data.lon);
+                        }
+                    }
+                )
+            })
+
+        function submit() {
+            var obj = new Object();
+            console.log('OK')
+
+            obj.name = document.getElementById('name').value
+            obj.lat = document.getElementById('lat').value
+            obj.lon = document.getElementById('lon').value
+
+            $.ajax(
+                {
+                    url: "http://localhost:8080/devices/" + id,
+                    method: "PUT",
+                    contentType: "application/json",
+                    data: JSON.stringify(obj),
+                    success: function (data) {
+                        window.location.href = './getDevice.html?id=' + id;
+                    }
+                }
+            )
+        }
+
+
+
+
+    </script>
+
+</head>
+
+<body>
+
+
+
+    <h1>Edit device</h1>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name"><br><br>
+    <label for="lat">Latitude:</label>
+    <input type="text" id="lat" name="lat"><br><br>
+    <label for="lon">Longitude:</label>
+    <input type="text" id="lon" name="lon"><br><br>
+    <button id="submit" onclick="submit()">Submit</button>
+    <button onclick="limpar()">Limpar</button>
+
+    <script>
+        function limpar() {
+            document.getElementById('name').value='';
+            document.getElementById('lat').value='';
+            document.getElementById('lon').value='';
+        } 
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,8 @@
+create table devices (id serial primary key, name text not null, lat float not null, lon float not null);
+
+CREATE TABLE readings (deviceId Integer,
+date timestamp,
+value float8,
+PRIMARY KEY(deviceId,
+date),
+FOREIGN KEY (deviceId) REFERENCES devices(id));
