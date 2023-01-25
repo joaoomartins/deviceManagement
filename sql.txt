@@ -5,4 +5,4 @@ date timestamp,
 value float8,
 PRIMARY KEY(deviceId,
 date),
-FOREIGN KEY (deviceId) REFERENCES devices(id));
+FOREIGN KEY (deviceId) REFERENCES devices(id)); 
