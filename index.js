@@ -103,6 +103,35 @@ app.put('/devices/:id', (req, res) => {
         })
 })
 
+app.delete('/delete', (req, res) => {
+    var id = req.body.id
+    console.log(req.body)
+    pool.query('DELETE FROM readings WHERE deviceId = $1',
+        [id], (error, results) => {
+            if (error) {
+                throw error;
+            }
+            if (results.rows.length) {
+                res.status(200)
+                results.rows.forEach(result => {
+                    console.log(result);
+                })
+            }
+            pool.query('DELETE FROM devices WHERE id = $1',
+            [id], (error, results) => {
+                if (error) {
+                    throw error;
+                }
+                if (results.rows.length) {
+    
+                    results.rows.forEach(result => {
+                        console.log(result);
+                    })
+                }
+            })
+    
+    })
+        })
 
 var date = new Date();
 var start_date = moment(date).subtract(1, 'days').format('YYYY-MM-DD');
@@ -125,11 +154,9 @@ const job = new cron.CronJob('*/1 * * * *', function () {
 
 
 
-//job.start();
+job.start();
 
-
-/*
-pool.query('SELECT * FROM device.devices ORDER BY id ASC', (error, results) => {
+pool.query('SELECT * FROM devices ORDER BY id ASC', (error, results) => {
     if (error) {
         throw error;
     }
@@ -137,8 +164,8 @@ pool.query('SELECT * FROM device.devices ORDER BY id ASC', (error, results) => {
 
         results.rows.forEach(result => {
             axios.get(
-                'https://archive-api.open-meteo.com/v1/archive?latitude=' + result.lat + '&longitude=' + result.lon + '&start_date='
-                + start_date + '&end_date='+end_date +'&hourly=temperature_2m')
+                'https://api.open-meteo.com/v1/forecast?latitude=' + result.lat + '&longitude=' +
+                result.lon + '&past_days=10&hourly=temperature_2m')
                 .then(response => {
                     //console.log(response);
 
@@ -147,7 +174,7 @@ pool.query('SELECT * FROM device.devices ORDER BY id ASC', (error, results) => {
 
                         console.log(element);
 
-                        pool.query('INSERT INTO device.readings(deviceId, date, value) VALUES ($1,$2,$3) ON CONFLICT DO NOTHING',
+                        pool.query('INSERT INTO readings(deviceId, date, value) VALUES ($1,$2,$3) ON CONFLICT DO NOTHING',
                             [result.id, element, response.data.hourly.temperature_2m[i]], (error, results) => {
                                 if (error) {
                                     throw error;
@@ -169,7 +196,6 @@ pool.query('SELECT * FROM device.devices ORDER BY id ASC', (error, results) => {
 
     }
 })
-*/
 
 app.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);

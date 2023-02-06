@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Delete Device</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+
+        $(document).ready(
+            function () {
+
+                $.ajax(
+                    {
+                        url: "http://localhost:8080/devices",
+                        method: "GET",
+                        success: function (data, status) {
+                            data.forEach(element => {
+                                $("#Device").append('<option value="'+element.id+'">'+element.name+'</option>') 
+                            });
+                        }
+                    }
+                )
+            })
+            
+        $(document).ready(function(){
+            $("#submit").click(function(){
+                var obj = new Object();
+                console.log('OK')
+                console.log($("#Device").val())
+
+                obj.id = $("#Device").val()
+
+                $.ajax(
+                    {
+                        url: "http://localhost:8080/delete",
+                        method: "DELETE",
+                        contentType: 'application/json',
+                        data: JSON.stringify(obj),
+                        success: function (data) {
+                            window.location.href = './showDevice.html';
+                        },
+                        error: function(status) {
+                            console.log(status);
+                        }
+                    }
+                )
+            });
+        })    
+    </script>
+
+</head>
+
+<body>
+
+
+    <h1>Delete device</h1>
+
+    <select name="Device" id="Device"></select>
+    <button id="submit">Submit</button>
+
+</body>
+
+</html>

@@ -43,7 +43,9 @@
                         success: function (data) {
                             console.log(data)
                             alert(data[0]);
-                            $("#nme").html(data[0].id + ' ' + data[0].name);
+                            $("#id").html("Id: " + data[0].id);
+                            $("#nme").html(" Nome: " + data[0].name);
+                            window.location.href = './showDevice.html';
                         }
                     }
                 )
@@ -98,21 +100,14 @@
 <body>
 
     <h1>Create device</h1>
-    <p id="nme">Name</p>
+    <p id="id">Id:</p>
+    <p id="nme">Name:</p>
     <label for="name">Name:</label>
     <input type="text" id="name" name="name"><br><br>
     <label for="lat">Latitude:</label>
     <input type="text" id="lat" name="lat"><br><br>
     <label for="lon">Longitude:</label>
     <input type="text" id="lon" name="lon"><br><br>
-
-<label for="TypeDevice">Tipo de Dispositivo:</label>
-  <select name="cars" id="cars">
-      <option value="telemovel">Telemovel</option>
-      <option value="notebook">Notebook</option>
-      <option value="Desktop">Desktop</option>
-  </select>
-
     <button id="submit">Submit</button>
     <button id="limpar" onclick="limpar()">Limpar</button>
 
