@@ -1,0 +1,24 @@
+#content h1 {
+    text-align: center;
+  }
+  
+#content table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  #content th {
+    background-color: #f2f2f2;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  #content td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  #content tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  

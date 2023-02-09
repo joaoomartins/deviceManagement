@@ -3,6 +3,7 @@
 
 <head>
     <title>Get Devices</title>
+    <link rel="stylesheet" href="get.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
     <script>
@@ -12,6 +13,10 @@
             var url_string = window.location.href; //window.location.href
             var url = new URL(url_string);
             var id = url.searchParams.get("id");
+
+            $("#voltare").click(function(){
+                window.location.href = './showDevice.html';
+            })
             $.ajax(
                 {
                     url: "http://localhost:8080/devices/" + id,
@@ -57,14 +62,14 @@
 
 
 
-    <h1 id="name"> </h1>
+    <h1 id="name"></h1>
     <div class="row" style="display: flex;">
         <div class="column" style="flex: 20%;padding: 5px">
             <h3 id="coord"> </h3>
         </div>
-        <div id="edit" class="column" style="flex: 80%;padding: 5px">
+        <div id="edit" class="column" style="flex: 80%;padding: 5px"></div>
+        <div><button id="voltare"><a href="./showDevice.html"></a>Voltar</button></div>
 
-        </div>
     </div>
 
 

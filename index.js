@@ -104,15 +104,32 @@ app.put('/devices/:id', (req, res) => {
 })
 
 app.delete('/delete', (req, res) => {
+    var id = req.body.id;
+    console.log(id);
+
+    Promise.all([
+        pool.query('DELETE FROM readings WHERE readings.deviceid = $1', [id]),
+        pool.query('DELETE FROM devices WHERE devices.id = $1', [id])
+    ])
+    .then((results) => {
+        console.log('DELETE successful');
+        res.status(200).json({ message: 'Device deleted successfully' });
+    })
+    .catch((error) => {
+        console.error(error);
+        res.status(500).json({ message: 'Error deleting device' });
+    });
+});
+/* app.delete('/delete', (req, res) => {
     var id = req.body.id
     console.log(req.body)
-    pool.query('DELETE FROM readings WHERE deviceId = $1',
+    pool.query('DELETE FROM readings WHERE deviceid = $1',
         [id], (error, results) => {
             if (error) {
                 throw error;
             }
             if (results.rows.length) {
-                res.status(200)
+                res.status(200);
                 results.rows.forEach(result => {
                     console.log(result);
                 })
@@ -131,7 +148,7 @@ app.delete('/delete', (req, res) => {
             })
     
     })
-        })
+        }) */
 
 var date = new Date();
 var start_date = moment(date).subtract(1, 'days').format('YYYY-MM-DD');
