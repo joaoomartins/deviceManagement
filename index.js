@@ -51,9 +51,10 @@ app.get('/devices/:id', (req, res) => {
     })
 });
 
-app.get('/devices/:id/values', (req, res) => {
+app.get('/devices/:id/values/:offset/', (req, res) => {
     var id = req.params.id
-    pool.query('SELECT * FROM readings r WHERE deviceId = $1 ORDER BY r.date ASC', [id], (error, results) => {
+    var offset = req.params.offset
+    pool.query('SELECT * FROM readings r WHERE deviceId = $1 ORDER BY r.date ASC limit 10 offset $2', [id, offset], (error, results) => {
         if (error) {
             throw error;
         }
@@ -103,7 +104,7 @@ app.put('/devices/:id', (req, res) => {
         })
 })
 
-/* app.delete('/delete', (req, res) => {
+app.delete('/delete', (req, res) => {
     var id = req.body.id;
     console.log(id);
 
@@ -119,36 +120,7 @@ app.put('/devices/:id', (req, res) => {
         console.error(error);
         res.status(500).json({ message: 'Error deleting device' });
     });
-}); */
-app.delete('/delete', (req, res) => {
-    var id = req.body.id
-    console.log(req.body)
-    pool.query('DELETE FROM readings WHERE deviceid = $1',
-        [id], (error, results) => {
-            if (error) {
-                throw error;
-            }
-            if (results.rows.length) {
-                res.status(200);
-                results.rows.forEach(result => {
-                    console.log(result);
-                })
-            }
-            pool.query('DELETE FROM devices WHERE id = $1',
-            [id], (error, results) => {
-                if (error) {
-                    throw error;
-                }
-                if (results.rows.length) {
-    
-                    results.rows.forEach(result => {
-                        console.log(result);
-                    })
-                }
-            })
-    
-    })
-        })
+});
 
 var date = new Date();
 var start_date = moment(date).subtract(1, 'days').format('YYYY-MM-DD');

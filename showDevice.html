@@ -18,7 +18,7 @@
                         console.log(data);
                         var out = '<table>';
                         $.each(data, function (key, value) {
-                            out += '<tr><td>'+ value.id +'</td><td> <a href="./getDevice.html?id=' + value.id + '">' + value.name + '</a></td></tr>';
+                            out += '<tr><td>'+ value.id +'</td><td> <a href="./getDevice.html?id=' + value.id + '">' + value.name + '</a></td><td> <a href="./readings.html?id=' + value.id + '">' + value.name + '</a> </td></tr>';
                         });
                         out += '</table>';
                         $("#content").html(out);
@@ -33,7 +33,7 @@
 
 
     </script><meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HomePage</title>
+    <title>Página Inicial</title>
 </head>
 <body>
     <div class="container-fluid">
@@ -41,7 +41,7 @@
             <div class="col-md-12">
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="./createDevice.html">Adicionar Dispositivo</a>
+                        <a class="nav-link active" href="./createDevice.html">Adicionar Dispositivos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./deleteDevice.html">Apagar Dispositivos</a>
@@ -55,6 +55,9 @@
                             </th>
                             <th>
                                 Dispositivo
+                            </th>
+                            <th>
+                                Leituras
                             </th>
                         </tr>
                     </thead>

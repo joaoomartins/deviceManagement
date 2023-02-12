@@ -1,0 +1,54 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+table {
+  margin: 0 auto;
+  margin-top: 50px;
+}
+thead th {
+  background-color: lightgray;
+  text-align: center;
+  font-size: 18px;
+  padding: 15px;
+}
+tbody td {
+  text-align: center;
+  font-size: 16px;
+  padding: 15px;
+}
+.pagination {
+  text-align: center;
+  margin-top: 50px;
+}
+.pagination button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: rgb(126, 255, 112);
+  border: none;
+  cursor: pointer;
+}
+#voltare {
+  background-color: #f44336;
+  color: white;
+  padding: 14px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  margin: 10px auto;
+  display: block;
+}
+
+#voltare:hover {
+  background-color: #dc143c;
+}

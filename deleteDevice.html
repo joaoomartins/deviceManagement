@@ -5,11 +5,11 @@
     <link rel="shortcut icon" href="favico.png" type="image/x-icon">
     <link rel="stylesheet" href="delete.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <title>Delete Device</title>
+    <title>Apagar Dispositivo</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
             
-        $(document).ready(
+        $(document).ready( 
             function () {
 
                 $.ajax(
@@ -24,49 +24,6 @@
                     }
                 )
             })
-
-           /*  $(document).ready(function(){
-                $("#submit").click(function(){
-                    var obj = new Object();
-
-                    obj.id = $("#Device").val()
-
-                    swal({
-                    title: "Quer apagar o dispositivo?",
-                    text: "Uma vez apagado, não podera voltar atrás!",
-                    icon: "warning",
-                    buttons: true,
-                    dangerMode: true,
-                    })
-                    .then((willDelete) => {
-                    if (willDelete) {
-
-                    $.ajax({
-                    url: "http://localhost:8080/delete",
-                    method: "DELETE",
-                    contentType: 'application/json',
-                    data: JSON.stringify(obj),
-                    success: function (data,status) {
-                        swal("Dispositivo apagado!", {
-                        icon: "success",
-                        }).then(() => {
-                        window.location.href = './showDevice.html';
-                        });
-                    },
-                    error: function(error) {
-                        swal("Erro ao apagar dispositivo!", {
-                        icon: "error",
-                        });
-                    }
-                    });
-                    } else {
-                    swal("Dispositivo não apagado!", {
-                        icon: "info",
-                        });
-                    }
-                    });
-                    });
-            }); */
 
             $(document).ready(function(){
             $("#voltare").click(function(){
@@ -125,7 +82,7 @@
 <body>
 
 
-    <h1>Delete device</h1>
+    <h1>Apagar Dispositivo</h1>
 
     <select name="Device" id="Device"></select>
     <button id="submit">Submeter</button>

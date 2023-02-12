@@ -1,3 +1,0 @@
-1 - css pagina createDevice.html
-2- Possivel novo css pra o edit
-3- Readings dos Devices

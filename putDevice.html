@@ -3,14 +3,18 @@
 
 <head>
     <link rel="shortcut icon" href="favico.png" type="image/x-icon">
+    <link rel="stylesheet" href="put.css">
     <title>Put Device</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
 
         var id;
-        $(document).ready(
-            function () {
+        $(document).ready(function () {
+
+                $("#voltare").click(function(){
+                window.location.href = './showDevice.html';
+                })
                 var url_string = window.location.href; //window.location.href
                 var url = new URL(url_string);
                 id = url.searchParams.get("id");
@@ -69,8 +73,8 @@
     <label for="lon">Longitude:</label>
     <input type="text" id="lon" name="lon"><br><br>
     <button id="submit" onclick="submit()">Submeter</button>
-    <button onclick="limpar()">Limpar</button>
-    <button><a href="./showDevice.html">Voltar</a></button>
+    <button id="limpar" onclick="limpar()">Limpar</button>
+    <button id="voltare">Voltar</button>
 
     <script>
         function limpar() {

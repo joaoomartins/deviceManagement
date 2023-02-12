@@ -1,42 +1,88 @@
-#name {
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    background-color: #f2f2f2;
+}
+
+h1 {
     text-align: center;
-    font-size: 36px;
+    margin-bottom: 30px;
+    color: #333;
     font-weight: bold;
-    margin-top: 50px;
 }
 
-.row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 50px;
+label {
+    display: block;
+    text-align: right;
+    width: 120px;
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: bold;
 }
 
-.column {
-    text-align: center;
-}
-
-#coord {
-    font-size: 24px;
-}
-
-#edit {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-#edit button {
-    background-color: rgb(98, 116, 239);
-    color: white;
-    padding: 10px 20px;
+input[type="text"] {
+    width: 200px;
+    height: 30px;
+    padding: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 14px;
+}
+
+#submit, #limpar, .GFG, #voltare {
+    width: 200px;
+    height: 40px;
+    margin: 20px auto;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
 }
 
-#mapdiv {
-    margin-top: 50px;
-    width: 100%;
-    height: 500px;
-    border: 1px solid lightgray;
+#submit {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#submit:hover {
+    background-color: #3e8e41;
+}
+
+#limpar {
+    background-color: grey;
+    color: white;
+}
+
+.GFG {
+    background-color: blue;
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+}
+
+.GFG:hover {
+    background-color: navy;
+}
+
+#voltare {
+    background-color: #f44336;
+    color: white;
+    padding: 5px 10px;
+    font-size: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    float: right;
+    margin-right: 10px;
+}
+
+#voltare:hover {
+    background-color:  #dc143c;
 }
