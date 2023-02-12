@@ -4,6 +4,7 @@
 <head>
     <title>Create Devices</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         $(document).ready(function () {
             $("#btn1").click(function () {
@@ -26,6 +27,9 @@
         })
 
         $(document).ready(function () {
+            $("#voltare").click(function(){
+                window.location.href = './showDevice.html';
+            })
             $("#submit").click(function () {
 
                 var obj = new Object();
@@ -42,10 +46,14 @@
                         data: JSON.stringify(obj),
                         success: function (data) {
                             console.log(data)
-                            alert(data[0]);
                             $("#id").html("Id: " + data[0].id);
                             $("#nme").html(" Nome: " + data[0].name);
-                            window.location.href = './showDevice.html';
+                            swal({
+                                title: "Dispositivo criado!",
+                                icon: "success",
+                                }).then(() => {
+                                window.location.href = './showDevice.html';
+                            });
                         }
                     }
                 )
@@ -110,6 +118,7 @@
     <input type="text" id="lon" name="lon"><br><br>
     <button id="submit">Submit</button>
     <button id="limpar" onclick="limpar()">Limpar</button>
+    <div><button id="voltare">Voltar</button></div>
 
     <script>
         function limpar() {

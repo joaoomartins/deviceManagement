@@ -103,7 +103,7 @@ app.put('/devices/:id', (req, res) => {
         })
 })
 
-app.delete('/delete', (req, res) => {
+/* app.delete('/delete', (req, res) => {
     var id = req.body.id;
     console.log(id);
 
@@ -119,8 +119,8 @@ app.delete('/delete', (req, res) => {
         console.error(error);
         res.status(500).json({ message: 'Error deleting device' });
     });
-});
-/* app.delete('/delete', (req, res) => {
+}); */
+app.delete('/delete', (req, res) => {
     var id = req.body.id
     console.log(req.body)
     pool.query('DELETE FROM readings WHERE deviceid = $1',
@@ -148,7 +148,7 @@ app.delete('/delete', (req, res) => {
             })
     
     })
-        }) */
+        })
 
 var date = new Date();
 var start_date = moment(date).subtract(1, 'days').format('YYYY-MM-DD');
